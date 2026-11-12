@@ -1,0 +1,18 @@
+node_modules/
+npm-debug.log*
+
+# compiled C programs (build them with `npm run build` or `make`)
+bin/*
+!bin/.gitkeep
+*.exe
+*.o
+
+# student data lives on your machine, not in git
+data/*
+!data/.gitkeep
+
+.env
+.DS_Store
+.env.*
+!.env.example
+Thumbs.db

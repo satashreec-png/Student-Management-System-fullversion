@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StudentHub student administration dashboard">
+  <title>StudentHub — Student Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="StudentHub home">
+        <span class="brand-mark">S</span>
+        <span>student<span class="brand-light">hub</span><small>ADMINISTRATION</small></span>
+      </a>
+
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-item active" href="#overview"><span class="nav-icon">▦</span> Overview</a>
+        <a class="nav-item" href="#students-section"><span class="nav-icon">♙</span> Students <span class="nav-count" id="nav-student-count">0</span></a>
+        <a class="nav-item" href="#departments-panel"><span class="nav-icon">▤</span> Departments</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">✦</div>
+          <strong>StudentHub workspace</strong>
+          <p>Manage student records and explore your academic data.</p>
+        </div>
+        <div class="sidebar-user">
+          <div class="avatar avatar-blue">A</div>
+          <div><strong>Administrator</strong><small>Workspace admin</small></div>
+          <span class="user-menu">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menu-button" type="button" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div>
+        <div class="topbar-actions">
+          <span class="status-dot"></span><span class="system-status">System online</span>
+          <div class="avatar avatar-blue">A</div>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="welcome-row" id="overview">
+          <div>
+            <p class="eyebrow">OVERVIEW</p>
+            <h1>Good day, Administrator <span class="wave">✦</span></h1>
+            <p class="welcome-copy">Here’s what’s happening with your student records.</p>
+          </div>
+          <div class="welcome-actions">
+            <button class="btn btn-secondary" id="refresh-button" type="button"><span>↻</span> Refresh</button>
+            <button class="btn btn-primary" id="add-button" type="button"><span>＋</span> Add student</button>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Student statistics">
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Total students</span><span class="stat-icon icon-indigo">♙</span></div>
+            <div class="stat-value" id="stat-total">—</div>
+            <div class="stat-foot"><span class="stat-accent">●</span> Students in your records</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Departments</span><span class="stat-icon icon-cyan">▤</span></div>
+            <div class="stat-value" id="stat-departments">—</div>
+            <div class="stat-foot">Academic departments represented</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Average age</span><span class="stat-icon icon-violet">◷</span></div>
+            <div class="stat-value" id="stat-age">—</div>
+            <div class="stat-foot">Across all recorded students</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">Colleges</span><span class="stat-icon icon-green">⌂</span></div>
+            <div class="stat-value" id="stat-colleges">—</div>
+            <div class="stat-foot">Institutions in your records</div>
+          </article>
+        </section>
+
+        <section class="insights-grid">
+          <article class="panel department-panel" id="departments-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">DISTRIBUTION</p><h2>Students by department</h2></div>
+              <span class="panel-chip">Live data</span>
+            </div>
+            <p class="panel-subtitle">Select a department to filter the student list.</p>
+            <ul id="dept-bars" class="department-bars"></ul>
+          </article>
+          <article class="panel quick-panel">
+            <div class="panel-heading"><div><p class="eyebrow">QUICK ACTIONS</p><h2>Manage records</h2></div></div>
+            <button class="quick-action" id="quick-add" type="button"><span class="quick-icon quick-blue">＋</span><span><strong>Add a student</strong><small>Create a new student record</small></span><b>→</b></button>
+            <button class="quick-action" id="quick-export" type="button"><span class="quick-icon quick-purple">⇩</span><span><strong>Export student list</strong><small>Download the current list as CSV</small></span><b>→</b></button>
+            <button class="quick-action" id="quick-clear" type="button"><span class="quick-icon quick-orange">⌕</span><span><strong>Clear filters</strong><small>Show all student records</small></span><b>→</b></button>
+          </article>
+        </section>
+
+        <section class="panel students-panel" id="students-section">
+          <div class="panel-heading students-heading">
+            <div><p class="eyebrow">DIRECTORY</p><h2>Student records</h2><p id="summary" class="panel-subtitle">Loading student records…</p></div>
+            <button class="btn btn-secondary export-main" id="export-button" type="button">⇩ Export CSV</button>
+          </div>
+
+          <div class="toolbar">
+            <label class="search-box" for="search"><span>⌕</span><input id="search" type="search" placeholder="Search name, college, department or ID…" autocomplete="off"><kbd>/</kbd></label>
+            <label class="select-wrap"><span class="sr-only">Department filter</span><select id="dept-filter"><option value="">All departments</option></select></label>
+            <label class="select-wrap"><span class="sr-only">Year filter</span><select id="year-filter"><option value="">All years</option><option value="1">Year 1</option><option value="2">Year 2</option><option value="3">Year 3</option><option value="4">Year 4</option><option value="5">Year 5</option><option value="6">Year 6</option></select></label>
+            <label class="select-wrap mobile-only"><span class="sr-only">Sort by</span><select id="sort-select"><option value="id">Sort: ID</option><option value="name">Sort: Name</option><option value="age">Sort: Age</option><option value="year">Sort: Year</option><option value="dept">Sort: Department</option></select></label>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr id="head-row">
+                <th scope="col" data-sort="id">ID</th>
+                <th scope="col" data-sort="name">STUDENT</th>
+                <th scope="col" data-sort="age">AGE</th>
+                <th scope="col" data-sort="year">YEAR</th>
+                <th scope="col" data-sort="semester">SEMESTER</th>
+                <th scope="col" data-sort="dept">DEPARTMENT</th>
+                <th scope="col" data-sort="college">COLLEGE</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+            <div id="empty" class="empty-state" hidden></div>
+          </div>
+          <div class="table-footer"><span id="table-count">Showing 0 students</span><span>StudentHub records</span></div>
+        </section>
+
+        <footer class="footer"><span>© StudentHub</span><span>Powered by C · Node.js · Express</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="form-dialog" aria-labelledby="form-title">
+    <form id="student-form" method="dialog" novalidate>
+      <div class="dialog-header"><div><p class="eyebrow">STUDENT DIRECTORY</p><h2 id="form-title">Add student</h2></div><button type="button" class="dialog-close" id="form-cancel-top" aria-label="Close">×</button></div>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+      <div class="form-grid">
+        <div class="field"><label for="f-id">Student ID</label><input id="f-id" name="id" type="number" min="1" step="1" placeholder="e.g. 1001" required><p class="error" data-error-for="id"></p></div>
+        <div class="field"><label for="f-age">Age</label><input id="f-age" name="age" type="number" min="5" max="100" step="1" placeholder="e.g. 20" required><p class="error" data-error-for="age"></p></div>
+        <div class="field span-2"><label for="f-name">Full name</label><input id="f-name" name="name" type="text" maxlength="49" placeholder="Enter student's full name" required><p class="error" data-error-for="name"></p></div>
+        <div class="field span-2"><label for="f-college">College / Institution</label><input id="f-college" name="college" type="text" maxlength="99" placeholder="Enter college name" required><p class="error" data-error-for="college"></p></div>
+        <div class="field"><label for="f-year">Academic year</label><select id="f-year" name="year" required></select><p class="error" data-error-for="year"></p></div>
+        <div class="field"><label for="f-semester">Semester</label><select id="f-semester" name="semester" required></select><p class="error" data-error-for="semester"></p></div>
+        <div class="field span-2"><label for="f-dept">Department</label><input id="f-dept" name="dept" type="text" maxlength="49" placeholder="e.g. Computer Science" required><p class="error" data-error-for="dept"></p></div>
+      </div>
+      <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="form-cancel">Cancel</button><button type="submit" class="btn btn-primary" id="form-submit">Save student</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="delete-dialog" aria-labelledby="delete-title">
+    <form method="dialog" id="delete-form">
+      <div class="dialog-header"><div><p class="eyebrow">CONFIRM ACTION</p><h2 id="delete-title">Delete student?</h2></div></div>
+      <p id="delete-text" class="delete-copy"></p>
+      <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="delete-cancel">Keep student</button><button type="submit" class="btn btn-danger" id="delete-confirm">Delete student</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

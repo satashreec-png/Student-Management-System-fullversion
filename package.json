@@ -1,0 +1,21 @@
+{
+  "name": "student-management-system",
+  "version": "2.0.0",
+  "description": "Full-stack student records app: a C storage engine, a Node.js/Express REST API and a web frontend.",
+  "main": "src/server.js",
+  "scripts": {
+    "build": "gcc -std=c11 -Wall -Wextra -O2 -o bin/student_engine c/engine.c c/student.c && gcc -std=c11 -Wall -Wextra -O2 -o bin/student_cli c/cli.c c/student.c",
+    "start": "node src/server.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test"
+  },
+  "keywords": ["c", "nodejs", "express", "rest-api", "crud", "student-management"],
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
